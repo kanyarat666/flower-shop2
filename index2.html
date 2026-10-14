@@ -1,0 +1,500 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloom & Bliss | ร้านดอกไม้ของคุณ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{--pink:#e88caf;--pale:#fbe8ef;--dark:#553542;--bg:#fffaf8;--muted:#927e87;--green:#66856d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--dark);font-family:Kanit,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:20;background:#fffdfbf2;backdrop-filter:blur(12px);border-bottom:1px solid #f1dfe6}
+.nav{max-width:1200px;margin:auto;padding:13px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-family:"Playfair Display",serif;font-size:27px;font-weight:700;color:#b65e81}
+.logo small{display:block;text-align:center;font:10px Kanit;letter-spacing:3px;color:var(--muted)}
+.nav-actions{display:flex;gap:7px;flex-wrap:wrap}
+.btn{border:0;border-radius:25px;padding:10px 16px;background:var(--pale);color:var(--dark);transition:.2s}
+.btn:hover{filter:brightness(.97);transform:translateY(-1px)}
+.primary{background:var(--pink);color:white}
+.dark{background:var(--dark);color:white}
+.outline{border:1px solid #e8c5d3;background:white}
+.hero,.section{max-width:1200px;margin:30px auto;padding:0 22px}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;min-height:350px;border-radius:25px;overflow:hidden;background:#f8e0e9}
+.hero-copy{padding:42px;align-self:center}
+.eyebrow{font-size:12px;letter-spacing:3px;color:#ad5c7d}
+h1{font:600 clamp(34px,5vw,54px)/1.2 "Playfair Display",Kanit,serif;margin:14px 0}
+.hero-copy p{line-height:1.9;color:#755d68}
+.hero-image{min-height:300px;background:url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=85") center/cover}
+.section-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:20px}
+.section-heading h2{margin:0;font-size:26px}
+.section-heading p{margin:5px 0 0;font-size:13px;color:var(--muted)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filter{border:1px solid #ecd8e0;background:white;color:var(--dark);border-radius:25px;padding:8px 15px}
+.filter.active{background:var(--dark);color:white}
+.search{border:1px solid #ead5de;border-radius:24px;padding:10px 14px;outline-color:var(--pink);background:white}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
+.product{background:white;border:1px solid #f0e1e7;border-radius:18px;overflow:hidden;transition:.2s}
+.product:hover{transform:translateY(-3px);box-shadow:0 8px 25px #70445712}
+.product-img{height:215px;position:relative;background:#f7e8ed}
+.product-img img{width:100%;height:100%;object-fit:cover}
+.tag{position:absolute;left:10px;top:10px;background:white;padding:4px 10px;border-radius:20px;font-size:11px}
+.heart{position:absolute;right:10px;top:10px;border:0;border-radius:50%;width:34px;height:34px;background:#ffffffed;color:#bc5e83;font-size:19px}
+.product-info{padding:13px}
+.product-info h3{margin:0 0 6px;font-size:16px}
+.desc{font-size:12px;color:var(--muted);line-height:1.7;min-height:60px}
+.meaning{color:#b05c7f}
+.price{font-size:19px;font-weight:600;color:#b85c81;margin:10px 0}
+.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.add{border:0;background:var(--pale);color:#9d4f70;border-radius:20px;padding:8px 10px;font-size:12px}
+.panel{background:white;border:1px solid #efdee5;border-radius:20px;padding:20px}
+.custom-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.preview{height:330px;border-radius:15px;overflow:hidden;position:relative;background:#f8e6ed}
+.preview img{width:100%;height:100%;object-fit:cover}
+.preview-caption{position:absolute;bottom:0;left:0;right:0;padding:22px;color:white;background:linear-gradient(transparent,#29121ebd)}
+.preview-caption h3{margin:0;font-size:22px}
+.preview-caption p{margin:5px 0 0;font-size:12px}
+.field{margin-bottom:15px}
+.field label{display:block;font-size:14px;font-weight:500;margin-bottom:7px}
+.field select,.field input,.field textarea{width:100%;padding:11px 12px;border:1px solid #ead6df;border-radius:11px;background:white;outline-color:var(--pink);color:var(--dark)}
+.field textarea{min-height:75px;resize:vertical}
+.size-options{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.size-btn{border:1px solid #ecd6df;background:white;border-radius:12px;padding:10px 3px;color:var(--dark)}
+.size-btn.active{border:2px solid var(--pink);background:#fff1f6}
+.size-btn strong,.size-btn span{display:block}
+.size-btn span{font-size:10px;color:var(--muted)}
+.notice{background:#fbecf2;border-radius:12px;padding:12px;font-size:13px;line-height:1.7}
+.cart-total{border-top:1px solid #efdee5;margin-top:16px;padding-top:13px}
+.total-row{display:flex;justify-content:space-between;gap:10px;margin:8px 0}
+.grand{font-size:22px;color:#b85c81;font-weight:600}
+.cart-list{display:grid;gap:12px}
+.cart-item{display:flex;align-items:center;gap:12px;border-bottom:1px solid #f0e3e8;padding:0 0 12px}
+.cart-item img{width:75px;height:75px;object-fit:cover;border-radius:12px}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-info h4{margin:0 0 5px;font-size:14px}
+.cart-item-info p{margin:0 0 5px;color:var(--muted);font-size:11px}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:27px;height:27px;border:0;border-radius:50%;background:var(--pale)}
+.checkout-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.full{grid-column:1/-1}
+.empty{text-align:center;padding:30px;color:var(--muted)}
+.modal-backdrop{display:none;position:fixed;inset:0;z-index:50;background:#30162188;align-items:center;justify-content:center;padding:14px}
+.modal-backdrop.show{display:flex}
+.modal{width:min(760px,100%);max-height:92vh;overflow:auto;background:var(--bg);border-radius:22px;padding:22px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.modal-head h2{margin:0;font-size:22px}
+.close{border:0;background:var(--pale);border-radius:50%;width:35px;height:35px;font-size:21px}
+.status-box{background:white;border:1px solid #efdee5;border-radius:15px;padding:17px;margin-top:15px}
+.status-step{display:flex;align-items:center;gap:10px;margin:12px 0}
+.dot{width:12px;height:12px;background:#eadde3;border-radius:50%}
+.dot.done{background:var(--green)}
+.admin-table{width:100%;border-collapse:collapse;font-size:12px}
+.admin-table th,.admin-table td{padding:10px;border-bottom:1px solid #efdee5;text-align:left}
+.admin-table select{padding:6px;border:1px solid #e6d4dc;border-radius:8px;max-width:145px}
+.admin-table-wrap{overflow:auto}
+.hidden{display:none!important}
+footer{margin-top:50px;background:#f7e4eb;text-align:center;padding:30px 20px}
+footer p{color:var(--muted);font-size:13px;line-height:1.8}
+.toast{display:none;position:fixed;z-index:100;bottom:20px;left:50%;transform:translateX(-50%);background:var(--dark);color:white;padding:12px 20px;border-radius:30px;max-width:90%;text-align:center}
+.toast.show{display:block}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-img{height:210px}}
+@media(max-width:600px){.nav{padding:10px}.logo{font-size:21px}.nav-actions .btn{font-size:11px;padding:8px 10px}.hero-inner{grid-template-columns:1fr}.hero-copy{padding:26px}.hero-image{min-height:210px}.grid{gap:10px}.product-img{height:160px}.product-info{padding:10px}.section{margin:27px auto}.custom-layout,.checkout-grid{grid-template-columns:1fr}.full{grid-column:auto}.section-heading{align-items:start;flex-direction:column}.search{width:100%}.panel{padding:14px}.size-btn{font-size:12px}.modal{padding:16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav">
+    <a class="logo" href="#" style="text-decoration:none">Bloom & Bliss<small>FLOWERS FOR EVERY FEELING</small></a>
+    <div class="nav-actions">
+      <button class="btn" onclick="scrollToSection('catalog')">เลือกดอกไม้</button>
+      <button class="btn" onclick="openCart()">🛍️ ตะกร้า <span id="cartCount">0</span></button>
+      <button class="btn outline" onclick="openTrack()">ติดตามออเดอร์</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+ <div class="hero-inner">
+  <div class="hero-copy">
+   <div class="eyebrow">A LITTLE LOVE IN EVERY BOUQUET</div>
+   <h1>ส่งต่อความรู้สึก<br>ผ่านดอกไม้ 🌷</h1>
+   <p>เลือกช่อดอกไม้ที่ตรงกับความรู้สึก หรือออกแบบช่อด้วยตัวเอง พร้อมความหมายดี ๆ สำหรับคนพิเศษ</p>
+   <button class="btn primary" onclick="scrollToSection('catalog')">เลือกช่อดอกไม้ →</button>
+   <button class="btn" onclick="scrollToSection('custom')">ออกแบบช่อเอง</button>
+  </div>
+  <div class="hero-image" role="img" aria-label="ช่อดอกไม้"></div>
+ </div>
+</section>
+
+<section class="section" id="catalog">
+ <div class="section-heading">
+  <div><h2>ช่อดอกไม้ของเรา 💐</h2><p>36 แบบให้เลือก พร้อมความหมายของแต่ละช่อ</p></div>
+  <input id="search" class="search" placeholder="ค้นหาช่อดอกไม้..." oninput="renderProducts()">
+ </div>
+ <div class="filters" id="filters"></div>
+ <div class="grid" id="productGrid"></div>
+</section>
+
+<section class="section" id="custom">
+ <div class="section-heading"><div><h2>ออกแบบช่อดอกไม้เอง 🎀</h2><p>เลือกชนิดดอกไม้ สี ขนาด และของตกแต่งตามใจ</p></div></div>
+ <div class="custom-layout">
+  <div class="panel">
+   <div class="preview">
+    <img id="previewImage" src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85" alt="ตัวอย่างช่อดอกไม้">
+    <div class="preview-caption"><h3 id="previewTitle">ช่อดอกไม้ในแบบคุณ</h3><p id="previewCaption">Made with love, just for you</p></div>
+   </div>
+   <div class="notice" id="flowerMeaning" style="margin-top:12px">ความหมาย: ความรักและความโรแมนติก</div>
+   <div class="cart-total">
+    <div class="total-row"><span>ราคาช่อที่ออกแบบ</span><strong class="grand" id="customPrice">฿890</strong></div>
+    <button class="btn primary" style="width:100%" onclick="addCustomToCart()">+ เพิ่มช่อที่ออกแบบลงตะกร้า</button>
+   </div>
+  </div>
+  <div class="panel">
+   <div class="field"><label>1. เลือกชนิดดอกไม้และความหมาย</label>
+    <select id="flowerType" onchange="updatePreview()"></select>
+   </div>
+   <div class="field"><label>2. โทนสีดอกไม้</label>
+    <select id="flowerColor" onchange="updatePreview()">
+     <option value="ชมพู">ชมพูหวาน — อ่อนโยน</option>
+     <option value="แดง">แดงโรแมนติก — รักลึกซึ้ง</option>
+     <option value="ขาว">ขาวมินิมอล — บริสุทธิ์</option>
+     <option value="เหลือง">เหลืองสดใส — ความสุข</option>
+     <option value="ม่วง">ม่วงพาสเทล — อ่อนหวาน</option>
+     <option value="ฟ้า">ฟ้าละมุน — สงบสบาย</option>
+     <option value="หลากสี">หลากสี — ร่าเริง</option>
+    </select>
+   </div>
+   <div class="field"><label>3. เลือกขนาดช่อ</label>
+    <div class="size-options">
+     <button class="size-btn" data-size="S" onclick="chooseSize('S')"><strong>S</strong><span>มินิ</span></button>
+     <button class="size-btn active" data-size="M" onclick="chooseSize('M')"><strong>M</strong><span>ยอดนิยม</span></button>
+     <button class="size-btn" data-size="L" onclick="chooseSize('L')"><strong>L</strong><span>ช่อใหญ่</span></button>
+     <button class="size-btn" data-size="XL" onclick="chooseSize('XL')"><strong>XL</strong><span>พรีเมียม</span></button>
+    </div>
+   </div>
+   <div class="field"><label>4. เลือกกระดาษห่อ</label>
+    <select id="wrapType" onchange="updatePreview()">
+     <option value="ครีมมินิมอล">ครีมมินิมอล (+฿0)</option>
+     <option value="ชมพูพาสเทล">ชมพูพาสเทล (+฿30)</option>
+     <option value="ดำพรีเมียม">ดำพรีเมียม (+฿50)</option>
+     <option value="กระดาษคราฟต์">กระดาษคราฟต์ (+฿20)</option>
+     <option value="ขาวเรียบหรู">ขาวเรียบหรู (+฿30)</option>
+    </select>
+   </div>
+   <div class="field"><label>5. เพิ่มของตกแต่ง</label>
+    <select id="extraType" onchange="updatePreview()">
+     <option value="ไม่มี">ไม่เพิ่มของตกแต่ง (+฿0)</option>
+     <option value="การ์ดข้อความ">การ์ดข้อความ (+฿20)</option>
+     <option value="ตุ๊กตาตัวเล็ก">ตุ๊กตาตัวเล็ก (+฿99)</option>
+     <option value="ช็อกโกแลต">ช็อกโกแลต (+฿79)</option>
+    </select>
+   </div>
+   <div class="field"><label>ข้อความบนการ์ด</label><textarea id="customMessage" placeholder="เขียนข้อความถึงคนพิเศษ..."></textarea></div>
+  </div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="section-heading"><div><h2>บริการของเรา 💗</h2><p>ใส่ใจทุกช่อและทุกความรู้สึก</p></div></div>
+ <div class="grid">
+  <div class="panel"><div style="font-size:30px">🌷</div><h3>ดอกไม้หลากหลาย</h3><p class="desc">เลือกได้หลายชนิด หลายสี พร้อมความหมายประกอบ</p></div>
+  <div class="panel"><div style="font-size:30px">🎀</div><h3>ออกแบบเองได้</h3><p class="desc">เลือกขนาด กระดาษห่อ และของตกแต่งได้</p></div>
+  <div class="panel"><div style="font-size:30px">💌</div><h3>ข้อความจากใจ</h3><p class="desc">เพิ่มข้อความพิเศษให้คนที่คุณรัก</p></div>
+  <div class="panel"><div style="font-size:30px">🚚</div><h3>ระบุวันรับสินค้า</h3><p class="desc">แจ้งวันและช่วงเวลาที่ต้องการจัดส่ง</p></div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="logo">Bloom & Bliss</div>
+ <p>FLOWERS FOR EVERY FEELING<br>ดอกไม้สำหรับทุกความรู้สึก ทุกช่วงเวลาที่มีความหมาย</p>
+ <button class="btn outline" onclick="openAdmin()">⚙️ สำหรับผู้ดูแลระบบ</button>
+ <p>© <span id="year"></span> Bloom & Bliss</p>
+</footer>
+
+<div class="modal-backdrop" id="cartModal" onclick="backdropClose(event,'cartModal')">
+ <div class="modal">
+  <div class="modal-head"><h2>🛍️ ตะกร้าสินค้า</h2><button class="close" onclick="closeModal('cartModal')">×</button></div>
+  <div id="cartContents"></div><div class="cart-total" id="cartSummary"></div>
+  <button class="btn primary" style="width:100%;margin-top:12px" onclick="openCheckout()">ดำเนินการสั่งซื้อ →</button>
+ </div>
+</div>
+
+<div class="modal-backdrop" id="checkoutModal" onclick="backdropClose(event,'checkoutModal')">
+ <div class="modal">
+  <div class="modal-head"><h2>💌 ข้อมูลจัดส่ง</h2><button class="close" onclick="closeModal('checkoutModal')">×</button></div>
+  <form id="checkoutForm">
+   <div class="checkout-grid">
+    <div class="field"><label>ชื่อผู้รับ *</label><input id="recipient" required placeholder="ชื่อ-นามสกุล"></div>
+    <div class="field"><label>เบอร์โทรศัพท์ *</label><input id="phone" required inputmode="tel" pattern="[0-9+() -]{9,20}" placeholder="08X-XXX-XXXX"></div>
+    <div class="field full"><label>ที่อยู่จัดส่ง *</label><textarea id="address" required placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"></textarea></div>
+    <div class="field"><label>วันที่ต้องการรับ</label><input type="date" id="deliveryDate"></div>
+    <div class="field"><label>ช่วงเวลาจัดส่ง</label><select id="deliveryTime"><option>09:00–12:00 น.</option><option>12:00–15:00 น.</option><option>15:00–18:00 น.</option><option>18:00–20:00 น.</option></select></div>
+    <div class="field full"><label>รายละเอียดเพิ่มเติม</label><textarea id="orderNote" placeholder="ฝากข้อความถึงร้าน..."></textarea></div>
+    <div class="field full"><label>วิธีชำระเงิน</label><select id="payment"><option>เก็บเงินปลายทาง (ตัวอย่าง)</option><option>โอนเงิน (รอร้านยืนยัน)</option></select></div>
+   </div>
+   <div class="notice">เว็บไซต์รุ่นนี้เป็นระบบสาธิต ยังไม่ตัดเงินจริงหรือเชื่อมต่อบริษัทขนส่ง</div>
+   <div id="checkoutTotal" class="cart-total"></div>
+   <button class="btn primary" type="submit" style="width:100%">ยืนยันคำสั่งซื้อ</button>
+  </form>
+ </div>
+</div>
+
+<div class="modal-backdrop" id="trackModal" onclick="backdropClose(event,'trackModal')">
+ <div class="modal">
+  <div class="modal-head"><h2>📦 ติดตามคำสั่งซื้อ</h2><button class="close" onclick="closeModal('trackModal')">×</button></div>
+  <form onsubmit="trackOrder(event)"><div class="field"><label>หมายเลขคำสั่งซื้อ</label><input id="trackId" required placeholder="เช่น BB12345678"></div><button class="btn primary">ตรวจสอบสถานะ</button></form>
+  <div id="trackResult"></div>
+ </div>
+</div>
+
+<div class="modal-backdrop" id="adminModal" onclick="backdropClose(event,'adminModal')">
+ <div class="modal">
+  <div class="modal-head"><h2>⚙️ หลังบ้านผู้ดูแล</h2><button class="close" onclick="closeModal('adminModal')">×</button></div>
+  <div id="adminLogin"><p>รหัสผ่านสาธิต: <strong>1234</strong></p><form onsubmit="adminLogin(event)"><div class="field"><label>รหัสผ่าน</label><input id="adminPassword" type="password" required></div><button class="btn primary">เข้าสู่ระบบ</button></form></div>
+  <div id="adminPanel" class="hidden">
+   <div class="filters"><button class="btn" onclick="renderAdmin()">รีเฟรชออเดอร์</button><button class="btn" onclick="exportOrders()">ส่งออก CSV</button><button class="btn outline" onclick="resetDemo()">รีเซ็ตข้อมูล</button></div>
+   <div id="adminStats" class="notice"></div>
+   <h3>คำสั่งซื้อ</h3><div class="admin-table-wrap"><table class="admin-table"><thead><tr><th>เลขออเดอร์</th><th>ลูกค้า</th><th>ยอดรวม</th><th>สถานะ</th></tr></thead><tbody id="adminOrders"></tbody></table></div>
+   <h3>เพิ่มสินค้าใหม่</h3>
+   <form id="addProductForm" class="checkout-grid">
+    <div class="field"><label>ชื่อสินค้า</label><input id="newName" required></div>
+    <div class="field"><label>ราคา (บาท)</label><input id="newPrice" type="number" min="1" required></div>
+    <div class="field full"><label>URL รูปภาพ</label><input id="newImage" type="url" required placeholder="https://..."></div>
+    <div class="field full"><label>ความหมายของช่อ</label><input id="newMeaning" placeholder="ความรัก ความสุข กำลังใจ..."></div>
+    <button class="btn primary full" type="submit">เพิ่มสินค้า</button>
+   </form>
+   <h3>รายการสินค้า</h3><div id="adminProducts"></div>
+   <button class="btn outline" onclick="adminLogout()">ออกจากระบบ</button>
+  </div>
+ </div>
+</div>
+<div id="toast" class="toast"></div>
+
+<script>
+const FLOWER_IMAGES={
+ rose:"https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85",
+ tulip:"https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=900&q=85",
+ sunflower:"https://images.unsplash.com/photo-1597848212624-e6c2f7c4b6e5?auto=format&fit=crop&w=900&q=85",
+ mixed:"https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=900&q=85",
+ hydrangea:"https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=900&q=85",
+ lily:"https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=900&q=85",
+ carnation:"https://images.unsplash.com/photo-1494972308805-463bc619d34e?auto=format&fit=crop&w=900&q=85",
+ gerbera:"https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=900&q=85",
+ orchid:"https://images.unsplash.com/photo-1566920451853-4c9e8a5c4f95?auto=format&fit=crop&w=900&q=85",
+ peony:"https://images.unsplash.com/photo-1455659817273-f96807779a8a?auto=format&fit=crop&w=900&q=85",
+ daisy:"https://images.unsplash.com/photo-1499002238440-d264edd596ec?auto=format&fit=crop&w=900&q=85",
+ babybreath:"https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=900&q=85",
+ chrysanthemum:"https://images.unsplash.com/photo-1508610048659-a06b669e3321?auto=format&fit=crop&w=900&q=85",
+ lavender:"https://images.unsplash.com/photo-1499002238440-d264edd596ec?auto=format&fit=crop&w=900&q=85",
+ iris:"https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=900&q=85",
+ alstroemeria:"https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=900&q=85"
+};
+const FLOWER_MEANINGS={
+ rose:{name:"กุหลาบ",meaning:"ความรัก ความโรแมนติก และความหลงใหล"},
+ tulip:{name:"ทิวลิป",meaning:"ความรักที่จริงใจและการเริ่มต้นใหม่"},
+ sunflower:{name:"ทานตะวัน",meaning:"ความสดใส ความหวัง และกำลังใจ"},
+ hydrangea:{name:"ไฮเดรนเยีย",meaning:"ความขอบคุณ ความเข้าใจ และความรู้สึกจากใจ"},
+ lily:{name:"ลิลลี่",meaning:"ความสง่างาม ความบริสุทธิ์ และความเคารพ"},
+ carnation:{name:"คาร์เนชัน",meaning:"ความรัก ความผูกพัน และความกตัญญู"},
+ gerbera:{name:"เยอบีร่า",meaning:"ความร่าเริง พลังบวก และมิตรภาพ"},
+ orchid:{name:"กล้วยไม้",meaning:"ความสง่างาม ความประณีต และความชื่นชม"},
+ peony:{name:"โบตั๋น",meaning:"ความมั่งคั่ง ความสุข และความรักที่สมบูรณ์"},
+ daisy:{name:"เดซี่",meaning:"ความสดใส ความไร้เดียงสา และการเริ่มต้นใหม่"},
+ babybreath:{name:"ยิปโซ",meaning:"ความรักอันบริสุทธิ์และความผูกพันที่ยั่งยืน"},
+ chrysanthemum:{name:"เบญจมาศ",meaning:"ความจริงใจ ความสุข และความปรารถนาดี"},
+ lavender:{name:"ลาเวนเดอร์",meaning:"ความสงบ ความผ่อนคลาย และความอ่อนโยน"},
+ iris:{name:"ไอริส",meaning:"ความหวัง ปัญญา และความกล้าหาญ"},
+ alstroemeria:{name:"อัลสโตรมีเรีย",meaning:"มิตรภาพ ความทุ่มเท และการสนับสนุน"},
+ mixed:{name:"ดอกไม้รวม",meaning:"ความสุข ความหลากหลาย และความปรารถนาดี"}
+};
+
+const PRODUCT_DATA=[
+["ช่อกุหลาบชมพูหวานใจ","กุหลาบ",890,"ขายดี","ความรักอันอ่อนโยน","rose"],
+["ช่อกุหลาบแดงแทนใจ","กุหลาบ",1290,"โรแมนติก","รักอย่างลึกซึ้ง","rose"],
+["ช่อกุหลาบขาวมินิมอล","กุหลาบ",990,"มินิมอล","รักบริสุทธิ์และจริงใจ","rose"],
+["ช่อกุหลาบพาสเทล","กุหลาบ",1190,"แนะนำ","ความรักที่อ่อนหวาน","rose"],
+["ช่อกุหลาบ 12 ดอก","กุหลาบ",1590,"พรีเมียม","การบอกรักอย่างตั้งใจ","rose"],
+["ช่อทิวลิปสีชมพู","ทิวลิป",1090,"ยอดนิยม","รักที่อ่อนโยน","tulip"],
+["ช่อทิวลิปสีขาว","ทิวลิป",1190,"มินิมอล","ความจริงใจและการเริ่มต้นใหม่","tulip"],
+["ช่อทิวลิปหลากสี","ทิวลิป",1390,"สดใส","ความสุขและความหวัง","tulip"],
+["ช่อทิวลิปวันพิเศษ","ทิวลิป",1690,"พรีเมียม","ความรักที่มีความหมาย","tulip"],
+["ช่อทานตะวันกำลังใจ","ทานตะวัน",590,"กำลังใจ","พลังบวกและความหวัง","sunflower"],
+["ช่อทานตะวันสดใส","ทานตะวัน",790,"ขายดี","ความสุขในทุกวัน","sunflower"],
+["ช่อทานตะวันคู่กุหลาบ","ทานตะวัน",1090,"แนะนำ","ความรักที่คอยสนับสนุน","sunflower"],
+["ช่อทานตะวันไซซ์ใหญ่","ทานตะวัน",1490,"ช่อใหญ่","ส่งกำลังใจอย่างเต็มที่","sunflower"],
+["ช่อไฮเดรนเยียสีฟ้า","ดอกไม้รวม",990,"ละมุน","ความขอบคุณจากใจ","hydrangea"],
+["ช่อไฮเดรนเยียพาสเทล","ดอกไม้รวม",1290,"พาสเทล","ความเข้าใจและความห่วงใย","hydrangea"],
+["ช่อไฮเดรนเยียพรีเมียม","ดอกไม้รวม",1790,"พรีเมียม","ความรู้สึกพิเศษที่อยากส่งต่อ","hydrangea"],
+["ช่อลิลลี่สีขาว","ดอกไม้รวม",1390,"สง่างาม","ความบริสุทธิ์และความเคารพ","lily"],
+["ช่อลิลลี่ชมพู","ดอกไม้รวม",1490,"หวานละมุน","ความชื่นชมและความอ่อนโยน","lily"],
+["ช่อลิลลี่วันแสดงความยินดี","ดอกไม้รวม",1690,"แสดงความยินดี","ความปรารถนาดีและความสำเร็จ","lily"],
+["ช่อคาร์เนชันชมพู","ดอกไม้รวม",690,"น่ารัก","ความรักและความผูกพัน","carnation"],
+["ช่อคาร์เนชันวันแม่","ดอกไม้รวม",990,"วันพิเศษ","ความรักและความกตัญญู","carnation"],
+["ช่อเยอบีร่าหลากสี","ดอกไม้รวม",790,"สดใส","ความร่าเริงและมิตรภาพ","gerbera"],
+["ช่อเยอบีร่าสีชมพู","ดอกไม้รวม",890,"น่ารัก","ความสุขและพลังบวก","gerbera"],
+["ช่อกล้วยไม้พรีเมียม","ดอกไม้รวม",1590,"หรูหรา","ความสง่างามและความชื่นชม","orchid"],
+["ช่อโบตั๋นหวานละมุน","ดอกไม้รวม",1890,"พรีเมียม","ความรักและความสุขสมบูรณ์","peony"],
+["ช่อเดซี่มินิ","ดอกไม้รวม",490,"มินิ","มิตรภาพและความสดใส","daisy"],
+["ช่อเดซี่สีขาว","ดอกไม้รวม",690,"มินิมอล","ความบริสุทธิ์ใจ","daisy"],
+["ช่อยิปโซฟุ้งฝัน","ดอกไม้รวม",590,"ขายดี","ความรักที่อ่อนโยน","babybreath"],
+["ช่อยิปโซสีชมพู","ดอกไม้รวม",790,"พาสเทล","ความผูกพันและความห่วงใย","babybreath"],
+["ช่อเบญจมาศอบอุ่น","ดอกไม้รวม",790,"อบอุ่น","ความจริงใจและความปรารถนาดี","chrysanthemum"],
+["ช่อลาเวนเดอร์พาสเทล","ดอกไม้รวม",890,"ผ่อนคลาย","ความสงบและความอ่อนโยน","lavender"],
+["ช่อไอริสแห่งความหวัง","ดอกไม้รวม",1090,"พิเศษ","ความหวังและกำลังใจ","iris"],
+["ช่ออัลสโตรมีเรียมิตรภาพ","ดอกไม้รวม",890,"มิตรภาพ","ความทุ่มเทและการสนับสนุน","alstroemeria"],
+["ช่อรักแรกพบ","ดอกไม้รวม",1290,"โรแมนติก","ความประทับใจแรกและความรัก","mixed"],
+["ช่อขอบคุณจากหัวใจ","ดอกไม้รวม",990,"แทนคำขอบคุณ","ความซาบซึ้งและความปรารถนาดี","mixed"],
+["ช่อแสดงความยินดี","ดอกไม้รวม",1490,"ฉลองความสำเร็จ","ความสุขและการเริ่มต้นที่ดี","mixed"]
+];
+const DEFAULT_PRODUCTS=PRODUCT_DATA.map((p,i)=>({
+ id:"p"+(i+1),name:p[0],category:p[1],price:p[2],tag:p[3],
+ desc:p[4],meaning:p[4],flowerType:p[5],image:FLOWER_IMAGES[p[5]]
+}));
+
+function readStore(key,fallback){try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback}catch(e){return fallback}}
+let products=readStore("bb_products",null)||DEFAULT_PRODUCTS.map(p=>({...p}));
+let cart=readStore("bb_cart",[]);
+let orders=readStore("bb_orders",[]);
+let favorites=readStore("bb_favorites",[]);
+let activeCategory="ทั้งหมด",chosenSize="M",adminOn=false;
+const sizePrices={S:490,M:890,L:1390,XL:1990};
+const sizeLabels={S:"S — มินิ",M:"M — ยอดนิยม",L:"L — ช่อใหญ่",XL:"XL — พรีเมียม"};
+const wrapPrices={"ครีมมินิมอล":0,"ชมพูพาสเทล":30,"ดำพรีเมียม":50,"กระดาษคราฟต์":20,"ขาวเรียบหรู":30};
+const extraPrices={"ไม่มี":0,"การ์ดข้อความ":20,"ตุ๊กตาตัวเล็ก":99,"ช็อกโกแลต":79};
+const money=n=>"฿"+Number(n||0).toLocaleString("th-TH");
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function save(){localStorage.setItem("bb_products",JSON.stringify(products));localStorage.setItem("bb_cart",JSON.stringify(cart));localStorage.setItem("bb_orders",JSON.stringify(orders));localStorage.setItem("bb_favorites",JSON.stringify(favorites))}
+function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove("show"),2500)}
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
+function showModal(id){document.getElementById(id).classList.add("show")}
+function closeModal(id){document.getElementById(id).classList.remove("show")}
+function backdropClose(e,id){if(e.target.id===id)closeModal(id)}
+function renderFilters(){
+ const cats=["ทั้งหมด",...new Set(products.map(p=>p.category))];
+ document.getElementById("filters").innerHTML=cats.map(c=>`<button class="filter ${activeCategory===c?"active":""}" onclick="setCategory('${esc(c)}')">${esc(c)}</button>`).join("");
+}
+function setCategory(c){activeCategory=c;renderFilters();renderProducts()}
+function renderProducts(){
+ const q=document.getElementById("search").value.trim().toLowerCase();
+ const list=products.filter(p=>(activeCategory==="ทั้งหมด"||p.category===activeCategory)&&
+ (p.name+" "+p.desc+" "+p.category+" "+(p.meaning||"")).toLowerCase().includes(q));
+ document.getElementById("productGrid").innerHTML=list.length?list.map(p=>`
+ <article class="product">
+  <div class="product-img"><img src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy" onerror="this.onerror=null;this.src='${FLOWER_IMAGES.mixed}'"><span class="tag">${esc(p.tag||"Bloom & Bliss")}</span>
+  <button class="heart" aria-label="รายการโปรด" onclick="toggleFavorite('${esc(p.id)}')">${favorites.includes(p.id)?"♥":"♡"}</button></div>
+  <div class="product-info"><h3>${esc(p.name)}</h3>
+   <div class="desc">${esc(p.desc||"ช่อดอกไม้จัดด้วยความใส่ใจ")}<br><span class="meaning">💗 ${esc(p.meaning||p.desc||"ความปรารถนาดี")}</span></div>
+   <div class="price">${money(p.price)}</div>
+   <div class="product-bottom"><span style="font-size:11px;color:var(--muted)">${esc(p.category)}</span><button class="add" onclick="addProduct('${esc(p.id)}')">+ เพิ่มลงตะกร้า</button></div>
+  </div>
+ </article>`).join(""):'<div class="empty" style="grid-column:1/-1">ไม่พบสินค้าที่ค้นหา 💐</div>';
+}
+function toggleFavorite(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[...favorites,id];save();renderProducts();toast(favorites.includes(id)?"เพิ่มรายการโปรดแล้ว ♥":"นำออกจากรายการโปรดแล้ว")}
+function updateCartCount(){document.getElementById("cartCount").textContent=cart.reduce((s,i)=>s+i.qty,0)}
+function addProduct(id){
+ const p=products.find(x=>x.id===id);if(!p)return;
+ const key="product-"+id,item=cart.find(x=>x.key===key);
+ if(item)item.qty++;else cart.push({key,id:p.id,name:p.name,price:Number(p.price),image:p.image,details:"ช่อดอกไม้สำเร็จรูป",qty:1});
+ save();updateCartCount();toast("เพิ่ม "+p.name+" ลงตะกร้าแล้ว")
+}
+function setupFlowerOptions(){
+ const select=document.getElementById("flowerType");
+ select.innerHTML=Object.entries(FLOWER_MEANINGS).map(([key,f])=>`<option value="${key}">${f.name} — ${f.meaning}</option>`).join("");
+}
+function updatePreview(){
+ const type=document.getElementById("flowerType").value;
+ const color=document.getElementById("flowerColor").value;
+ const wrap=document.getElementById("wrapType").value;
+ const extra=document.getElementById("extraType").value;
+ const f=FLOWER_MEANINGS[type]||FLOWER_MEANINGS.rose;
+ document.getElementById("previewImage").src=FLOWER_IMAGES[type]||FLOWER_IMAGES.rose;
+ document.getElementById("previewTitle").textContent="ช่อ"+f.name+"โทน"+color;
+ document.getElementById("previewCaption").textContent=sizeLabels[chosenSize]+" · ห่อ"+wrap+(extra!=="ไม่มี"?" · "+extra:"");
+ document.getElementById("flowerMeaning").textContent="ความหมายของ"+f.name+": "+f.meaning;
+ document.getElementById("customPrice").textContent=money(sizePrices[chosenSize]+wrapPrices[wrap]+extraPrices[extra]);
+}
+function chooseSize(s){chosenSize=s;document.querySelectorAll(".size-btn").forEach(b=>b.classList.toggle("active",b.dataset.size===s));updatePreview()}
+function addCustomToCart(){
+ const type=document.getElementById("flowerType").value,color=document.getElementById("flowerColor").value;
+ const wrap=document.getElementById("wrapType").value,extra=document.getElementById("extraType").value;
+ const f=FLOWER_MEANINGS[type],price=sizePrices[chosenSize]+wrapPrices[wrap]+extraPrices[extra];
+ const details={flower:f.name,meaning:f.meaning,color,wrap,size:chosenSize,extra,card:document.getElementById("customMessage").value.trim()};
+ cart.push({key:"custom-"+Date.now(),name:"ช่อ"+f.name+"โทน"+color,price,image:FLOWER_IMAGES[type],details,qty:1});
+ save();updateCartCount();toast("เพิ่มช่อที่ออกแบบลงตะกร้าแล้ว 💐")
+}
+function total(){return cart.reduce((s,i)=>s+i.price*i.qty,0)}
+function openCart(){renderCart();showModal("cartModal")}
+function renderCart(){
+ const area=document.getElementById("cartContents");
+ area.innerHTML=cart.length?`<div class="cart-list">${cart.map(i=>`<div class="cart-item">
+ <img src="${esc(i.image)}" alt=""><div class="cart-item-info"><h4>${esc(i.name)}</h4>
+ <p>${typeof i.details==="string"?esc(i.details):esc([i.details.flower,i.details.size&&"ขนาด "+i.details.size,i.details.color,i.details.wrap&&"ห่อ"+i.details.wrap,i.details.extra&&i.details.extra!=="ไม่มี"?i.details.extra:""].filter(Boolean).join(" · "))}</p>
+ <strong>${money(i.price*i.qty)}</strong></div><div class="qty"><button onclick="changeQty('${esc(i.key)}',-1)">−</button><span>${i.qty}</span><button onclick="changeQty('${esc(i.key)}',1)">+</button><button onclick="removeItem('${esc(i.key)}')">×</button></div>
+ </div>`).join("")}</div>`:'<div class="empty">ตะกร้ายังว่างอยู่ 💗<br>เลือกช่อดอกไม้ที่ชอบได้เลย</div>';
+ document.getElementById("cartSummary").innerHTML=`<div class="total-row"><span>ยอดสินค้า</span><strong>${money(total())}</strong></div><div class="total-row"><span>ค่าจัดส่ง</span><span>รอร้านยืนยัน</span></div><div class="total-row grand"><span>รวมสินค้า</span><span>${money(total())}</span></div>`;
+ updateCartCount()
+}
+function changeQty(key,delta){const item=cart.find(i=>i.key===key);if(!item)return;item.qty+=delta;if(item.qty<=0)cart=cart.filter(i=>i.key!==key);save();renderCart()}
+function removeItem(key){cart=cart.filter(i=>i.key!==key);save();renderCart()}
+function openCheckout(){
+ if(!cart.length){toast("กรุณาเลือกสินค้าก่อนสั่งซื้อ");return}
+ closeModal("cartModal");
+ document.getElementById("checkoutTotal").innerHTML=`<div class="total-row"><span>ยอดสินค้าทั้งหมด</span><strong>${money(total())}</strong></div><div class="total-row"><span>ค่าจัดส่ง</span><span>รอร้านยืนยัน</span></div>`;
+ const d=document.getElementById("deliveryDate"),now=new Date();now.setMinutes(now.getMinutes()-now.getTimezoneOffset());d.min=now.toISOString().slice(0,10);
+ showModal("checkoutModal")
+}
+document.getElementById("checkoutForm").addEventListener("submit",e=>{
+ e.preventDefault();if(!cart.length){toast("ตะกร้าว่าง กรุณาเลือกสินค้าใหม่");return}
+ const id="BB"+Date.now().toString().slice(-8);
+ const order={id,createdAt:new Date().toISOString(),recipient:document.getElementById("recipient").value.trim(),phone:document.getElementById("phone").value.trim(),address:document.getElementById("address").value.trim(),deliveryDate:document.getElementById("deliveryDate").value,deliveryTime:document.getElementById("deliveryTime").value,note:document.getElementById("orderNote").value.trim(),payment:document.getElementById("payment").value,items:cart.map(i=>({...i})),total:total(),status:"รอยืนยัน",history:[{status:"รอยืนยัน",time:new Date().toISOString()}]};
+ orders.unshift(order);cart=[];save();updateCartCount();closeModal("checkoutModal");e.target.reset();
+ document.getElementById("trackId").value=id;showModal("trackModal");renderTracking(order);toast("สั่งซื้อสำเร็จ เลขที่ "+id)
+});
+function openTrack(){document.getElementById("trackResult").innerHTML="";showModal("trackModal")}
+function trackOrder(e){e.preventDefault();const id=document.getElementById("trackId").value.trim().toUpperCase();renderTracking(orders.find(o=>o.id.toUpperCase()===id))}
+function renderTracking(order){
+ const el=document.getElementById("trackResult");
+ if(!order){el.innerHTML='<div class="status-box">ไม่พบหมายเลขคำสั่งซื้อ กรุณาตรวจสอบอีกครั้ง</div>';return}
+ const steps=["รอยืนยัน","ยืนยันแล้ว","กำลังจัดเตรียม","กำลังจัดส่ง","จัดส่งสำเร็จ"],idx=steps.indexOf(order.status);
+ el.innerHTML=`<div class="status-box"><small>หมายเลขคำสั่งซื้อ</small><h2>${esc(order.id)}</h2><p>ผู้รับ: ${esc(order.recipient)}</p><p>ยอดสินค้า: <strong>${money(order.total)}</strong></p><p>วันที่สั่ง: ${new Date(order.createdAt).toLocaleString("th-TH")}</p><p>สถานะ: <strong>${esc(order.status)}</strong></p><hr>${steps.map((s,i)=>`<div class="status-step"><span class="dot ${idx>=i&&idx>=0?"done":""}"></span>${s}</div>`).join("")}${order.status==="ยกเลิก"?"<p>คำสั่งซื้อนี้ถูกยกเลิก</p>":""}<small>ข้อมูลติดตามนี้เป็นข้อมูลจำลองในเบราว์เซอร์</small></div>`
+}
+function openAdmin(){showModal("adminModal")}
+function adminLogin(e){e.preventDefault();if(document.getElementById("adminPassword").value!=="1234"){toast("รหัสผ่านไม่ถูกต้อง");return}adminOn=true;document.getElementById("adminLogin").classList.add("hidden");document.getElementById("adminPanel").classList.remove("hidden");renderAdmin()}
+function adminLogout(){adminOn=false;document.getElementById("adminLogin").classList.remove("hidden");document.getElementById("adminPanel").classList.add("hidden");document.getElementById("adminPassword").value=""}
+function renderAdmin(){
+ if(!adminOn)return;
+ document.getElementById("adminStats").innerHTML=`ออเดอร์ทั้งหมด <strong>${orders.length}</strong> รายการ · ยอดรวม <strong>${money(orders.reduce((s,o)=>s+o.total,0))}</strong> · สินค้า <strong>${products.length}</strong> รายการ`;
+ const states=["รอยืนยัน","ยืนยันแล้ว","กำลังจัดเตรียม","กำลังจัดส่ง","จัดส่งสำเร็จ","ยกเลิก"];
+ document.getElementById("adminOrders").innerHTML=orders.length?orders.map(o=>`<tr><td><strong>${esc(o.id)}</strong><br>${new Date(o.createdAt).toLocaleDateString("th-TH")}</td><td>${esc(o.recipient)}<br>${esc(o.phone)}</td><td>${money(o.total)}</td><td><select onchange="changeStatus('${esc(o.id)}',this.value)">${states.map(s=>`<option ${s===o.status?"selected":""}>${s}</option>`).join("")}</select></td></tr>`).join(""):'<tr><td colspan="4">ยังไม่มีคำสั่งซื้อ</td></tr>';
+ document.getElementById("adminProducts").innerHTML=products.map(p=>`<div class="cart-item"><img src="${esc(p.image)}" alt=""><div class="cart-item-info"><h4>${esc(p.name)}</h4><p>${money(p.price)} · ${esc(p.category)}</p><p>${esc(p.meaning||p.desc||"")}</p></div><button class="btn" onclick="deleteProduct('${esc(p.id)}')">ลบ</button></div>`).join("")
+}
+function changeStatus(id,status){const o=orders.find(x=>x.id===id);if(!o)return;o.status=status;o.history=o.history||[];o.history.push({status,time:new Date().toISOString()});save();renderAdmin();toast("อัปเดตสถานะแล้ว")}
+function deleteProduct(id){if(!confirm("ต้องการลบสินค้านี้หรือไม่?"))return;products=products.filter(p=>p.id!==id);save();renderFilters();renderProducts();renderAdmin();toast("ลบสินค้าแล้ว")}
+document.getElementById("addProductForm").addEventListener("submit",e=>{
+ e.preventDefault();if(!adminOn)return;
+ const name=document.getElementById("newName").value.trim(),price=Number(document.getElementById("newPrice").value),image=document.getElementById("newImage").value.trim(),meaning=document.getElementById("newMeaning").value.trim();
+ if(!name||price<=0||!image)return;
+ products.push({id:"p"+Date.now(),name,category:"ดอกไม้รวม",price,tag:"สินค้าใหม่",desc:meaning||"ช่อดอกไม้จัดด้วยความใส่ใจ",meaning:meaning||"ความปรารถนาดี",image});
+ save();e.target.reset();renderFilters();renderProducts();renderAdmin();toast("เพิ่มสินค้าเรียบร้อย")
+});
+function exportOrders(){
+ if(!adminOn)return;
+ const rows=[["Order ID","Date","Recipient","Phone","Address","Total","Payment","Status"],...orders.map(o=>[o.id,o.createdAt,o.recipient,o.phone,o.address,o.total,o.payment,o.status])];
+ const csv="\uFEFF"+rows.map(r=>r.map(v=>'"'+String(v??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");
+ const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8;"}));a.download="bloom-bliss-orders.csv";a.click();URL.revokeObjectURL(a.href)
+}
+function resetDemo(){
+ if(!confirm("คืนสินค้าเริ่มต้นและล้างออเดอร์กับตะกร้า?"))return;
+ orders=[];products=DEFAULT_PRODUCTS.map(p=>({...p}));cart=[];favorites=[];save();renderFilters();renderProducts();renderAdmin();updateCartCount();toast("รีเซ็ตข้อมูลแล้ว")
+}
+document.getElementById("year").textContent=new Date().getFullYear();
+setupFlowerOptions();
+renderFilters();renderProducts();updatePreview();updateCartCount();
+</script>
+</body>
+</html>
